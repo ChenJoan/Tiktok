@@ -1,24 +1,18 @@
 package com.bytedance.tiktok.activity;
 
-import android.widget.ImageView;
-import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.base.BaseActivity;
-import butterknife.BindView;
+import com.bytedance.tiktok.databinding.ActivityShowImageBinding;
 
-public class ShowImageActivity extends BaseActivity {
-    @BindView(R.id.iv_head)
-    ImageView ivHead;
-
-    @Override
-    protected int setLayoutId() {
-        return R.layout.activity_show_image;
-    }
+/**
+ * 查看照片activity
+ */
+public class ShowImageActivity extends BaseActivity<ActivityShowImageBinding> {
 
     @Override
     protected void init() {
-        ivHead.setOnClickListener(v -> finish());
+        binding.ivHead.setOnClickListener(v -> finish());
 
         int headRes = getIntent().getIntExtra("res", 0);
-        ivHead.setImageResource(headRes);
+        binding.ivHead.setImageResource(headRes);
     }
 }

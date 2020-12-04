@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 /**
- * create by libo
- * create on 2018/11/15
- * description RecyclerAdapter基类
+ *  RecyclerAdapter基类
  * tip多套布局T传Object类型，其他直接传具体类型
  */
 public abstract class BaseRvAdapter<T,VH extends BaseRvViewHolder> extends RecyclerView.Adapter<VH> {

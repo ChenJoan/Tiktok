@@ -15,6 +15,7 @@ import com.bytedance.tiktok.bean.CurUserBean;
 import com.bytedance.tiktok.bean.DataCreate;
 import com.bytedance.tiktok.bean.MainPageChangeEvent;
 import com.bytedance.tiktok.bean.PauseVideoEvent;
+import com.bytedance.tiktok.databinding.FragmentRecommendBinding;
 import com.bytedance.tiktok.utils.OnVideoControllerListener;
 import com.bytedance.tiktok.utils.RxBus;
 import com.bytedance.tiktok.view.CommentDialog;
@@ -32,28 +33,19 @@ import rx.functions.Action1;
  * create on 2020-05-19
  * description 推荐播放页
  */
-public class RecommendFragment extends BaseFragment {
-    @BindView(R.id.recyclerview)
-    RecyclerView recyclerView;
+public class RecommendFragment extends BaseFragment<FragmentRecommendBinding> {
     private VideoAdapter adapter;
     private ViewPagerLayoutManager viewPagerLayoutManager;
     /** 当前播放视频位置 */
     private int curPlayPos = -1;
     private FullScreenVideoView videoView;
-    @BindView(R.id.refreshlayout)
-    SwipeRefreshLayout refreshLayout;
     private ImageView ivCurCover;
-
-    @Override
-    protected int setLayoutId() {
-        return R.layout.fragment_recommend;
-    }
 
     @Override
     protected void init() {
 
         adapter = new VideoAdapter(getActivity(), DataCreate.datas);
-        recyclerView.setAdapter(adapter);
+        binding.recyclerview.setAdapter(adapter);
 
         videoView = new FullScreenVideoView(getActivity());
 
@@ -99,8 +91,8 @@ public class RecommendFragment extends BaseFragment {
 
     private void setViewPagerLayoutManager() {
         viewPagerLayoutManager = new ViewPagerLayoutManager(getActivity());
-        recyclerView.setLayoutManager(viewPagerLayoutManager);
-        recyclerView.scrollToPosition(PlayListActivity.initPos);
+        binding.recyclerview.setLayoutManager(viewPagerLayoutManager);
+        binding.recyclerview.scrollToPosition(PlayListActivity.initPos);
 
         viewPagerLayoutManager.setOnViewPagerListener(new OnViewPagerListener() {
             @Override
@@ -123,8 +115,8 @@ public class RecommendFragment extends BaseFragment {
     }
 
     private void setRefreshEvent() {
-        refreshLayout.setColorSchemeResources(R.color.color_link);
-        refreshLayout.setOnRefreshListener(() -> new CountDownTimer(1000, 1000) {
+        binding.refreshlayout.setColorSchemeResources(R.color.color_link);
+        binding.refreshlayout.setOnRefreshListener(() -> new CountDownTimer(1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
 
@@ -132,7 +124,7 @@ public class RecommendFragment extends BaseFragment {
 
             @Override
             public void onFinish() {
-                refreshLayout.setRefreshing(false);
+                binding.refreshlayout.setRefreshing(false);
             }
         }.start());
     }

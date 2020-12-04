@@ -1,31 +1,46 @@
 package com.bytedance.tiktok.base;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
+import com.bytedance.tiktok.utils.ClassUtils;
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
+import androidx.viewbinding.ViewBinding;
 
 /**
- * create by libo
- * create on 2020-05-19
- * description activity基类
+ * activity基类
  */
-public abstract class BaseActivity extends AppCompatActivity {
-    protected Unbinder unbinder;
+public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActivity {
+
+    protected T binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(setLayoutId());
-
-        unbinder = ButterKnife.bind(this);
+        binding = getBinding();
+        setContentView(binding.getRoot());
         init();
     }
 
-    protected abstract int setLayoutId();
+    // 获取binding
+    protected T getBinding(){
+        try {
+            Type superClass = getClass().getGenericSuperclass();
+            Type type = ((ParameterizedType) superClass).getActualTypeArguments()[0];
+            Class<?> clazz = ClassUtils.getRawType(type);
+            Method method = clazz.getMethod("inflate", LayoutInflater.class);
+            return (T) method.invoke(null, getLayoutInflater());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     protected abstract void init();
 
@@ -67,7 +82,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        unbinder.unbind();
+        binding = null;
     }
 }

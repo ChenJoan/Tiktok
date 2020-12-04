@@ -2,24 +2,20 @@ package com.bytedance.tiktok.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.base.BaseRvAdapter;
-import com.bytedance.tiktok.base.BaseRvViewHolder;
 import com.bytedance.tiktok.bean.VideoBean;
-import com.bytedance.tiktok.view.CircleImageView;
+import com.bytedance.tiktok.databinding.ItemFansBinding;
+import com.bytedance.tiktok.viewHolder.FansViewHolder;
+
 import java.util.List;
-import butterknife.BindView;
 
 /**
- * create by libo
- * create on 2020-05-24
- * description
+ * 粉丝页面adapter
  */
-public class FansAdapter extends BaseRvAdapter<VideoBean.UserBean, FansAdapter.FansViewHolder> {
+public class FansAdapter extends BaseRvAdapter<VideoBean.UserBean, FansViewHolder> {
 
     public FansAdapter(Context context, List<VideoBean.UserBean> datas) {
         super(context, datas);
@@ -27,17 +23,17 @@ public class FansAdapter extends BaseRvAdapter<VideoBean.UserBean, FansAdapter.F
 
     @Override
     protected void onBindData(FansViewHolder holder, VideoBean.UserBean userBean, int position) {
-        holder.ivHead.setImageResource(userBean.getHead());
-        holder.tvNickname.setText(userBean.getNickName());
-        holder.tvFocus.setText(userBean.isFocused() ? "已关注" : "关注");
+        holder.getBinding().ivHead.setImageResource(userBean.getHead());
+        holder.getBinding().tvNickname.setText(userBean.getNickName());
+        holder.getBinding().tvFocus.setText(userBean.isFocused() ? "已关注" : "关注");
 
-        holder.tvFocus.setOnClickListener(v -> {
+        holder.getBinding().tvFocus.setOnClickListener(v -> {
             if (!userBean.isFocused()) {
-                holder.tvFocus.setText("已关注");
-                holder.tvFocus.setBackgroundResource(R.drawable.shape_round_halfwhite);
+                holder.getBinding().tvFocus.setText("已关注");
+                holder.getBinding().tvFocus.setBackgroundResource(R.drawable.shape_round_halfwhite);
             } else {
-                holder.tvFocus.setText("关注");
-                holder.tvFocus.setBackgroundResource(R.drawable.shape_round_red);
+                holder.getBinding().tvFocus.setText("关注");
+                holder.getBinding().tvFocus.setBackgroundResource(R.drawable.shape_round_red);
             }
 
             userBean.setFocused(!userBean.isFocused());
@@ -47,20 +43,7 @@ public class FansAdapter extends BaseRvAdapter<VideoBean.UserBean, FansAdapter.F
     @NonNull
     @Override
     public FansViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_fans, parent, false);
-        return new FansViewHolder(view);
-    }
-
-    public class FansViewHolder extends BaseRvViewHolder {
-        @BindView(R.id.iv_head)
-        CircleImageView ivHead;
-        @BindView(R.id.tv_nickname)
-        TextView tvNickname;
-        @BindView(R.id.tv_focus)
-        TextView tvFocus;
-
-        public FansViewHolder(View itemView) {
-            super(itemView);
-        }
+        ItemFansBinding itemFansBinding = ItemFansBinding.inflate(LayoutInflater.from(context), parent, false);
+        return new FansViewHolder(itemFansBinding);
     }
 }

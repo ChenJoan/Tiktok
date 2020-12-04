@@ -3,28 +3,20 @@ package com.bytedance.tiktok.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
-import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.activity.PlayListActivity;
 import com.bytedance.tiktok.base.BaseRvAdapter;
-import com.bytedance.tiktok.base.BaseRvViewHolder;
 import com.bytedance.tiktok.bean.VideoBean;
-import com.bytedance.tiktok.view.IconFontTextView;
+import com.bytedance.tiktok.databinding.ItemGridvideoBinding;
+import com.bytedance.tiktok.viewHolder.GridVideoViewHolder;
 
 import java.util.List;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
- * create by libo
- * create on 2020-05-20
- * description
+ * gridVideoAdapter
  */
-public class GridVideoAdapter extends BaseRvAdapter<VideoBean, GridVideoAdapter.GridVideoViewHolder> {
+public class GridVideoAdapter extends BaseRvAdapter<VideoBean, GridVideoViewHolder> {
 
     public GridVideoAdapter(Context context, List<VideoBean> datas) {
         super(context, datas);
@@ -32,10 +24,10 @@ public class GridVideoAdapter extends BaseRvAdapter<VideoBean, GridVideoAdapter.
 
     @Override
     protected void onBindData(GridVideoViewHolder holder, VideoBean videoBean, int position) {
-        holder.ivCover.setBackgroundResource(videoBean.getCoverRes());
-        holder.tvContent.setText(videoBean.getContent());
-        holder.tvDistance.setText(videoBean.getDistance() + " km");
-        holder.ivHead.setImageResource(videoBean.getUserBean().getHead());
+        holder.getBinding().ivCover.setBackgroundResource(videoBean.getCoverRes());
+        holder.getBinding().tvContent.setText(videoBean.getContent());
+        holder.getBinding().tvDistance.setText(videoBean.getDistance() + " km");
+        holder.getBinding().ivHead.setImageResource(videoBean.getUserBean().getHead());
 
         holder.itemView.setOnClickListener(v -> {
             PlayListActivity.initPos = position;
@@ -46,24 +38,7 @@ public class GridVideoAdapter extends BaseRvAdapter<VideoBean, GridVideoAdapter.
     @NonNull
     @Override
     public GridVideoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_gridvideo, parent, false);
-        return new GridVideoViewHolder(view);
-    }
-
-    public class GridVideoViewHolder extends BaseRvViewHolder {
-        @BindView(R.id.iv_cover)
-        ImageView ivCover;
-        @BindView(R.id.tv_content)
-        TextView tvContent;
-        @BindView(R.id.tv_distance)
-        IconFontTextView tvDistance;
-        @BindView(R.id.iv_head)
-        ImageView ivHead;
-
-        public GridVideoViewHolder(View itemView) {
-            super(itemView);
-
-            ButterKnife.bind(this, itemView);
-        }
+        ItemGridvideoBinding itemGridvideoBinding = ItemGridvideoBinding.inflate(LayoutInflater.from(context), parent, false);
+        return new GridVideoViewHolder(itemGridvideoBinding);
     }
 }

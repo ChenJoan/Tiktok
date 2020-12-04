@@ -1,21 +1,19 @@
 package com.bytedance.tiktok.base;
 
 import android.os.Parcelable;
-
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import java.util.ArrayList;
 
 /**
- * create by libo
- * create on 2020/5/19
- * description 公共viewPageradapter
+ *  公共viewPagerAdapter
  */
 public class CommPagerAdapter extends FragmentStatePagerAdapter {
 
-    private ArrayList<? extends Fragment> items;
-    private String[] mTitles;
+    private final ArrayList<? extends Fragment> items;
+    private final String[] mTitles;
 
     public CommPagerAdapter(FragmentManager fm, ArrayList< ? extends Fragment> items, String[] mTitles) {
         super(fm);
@@ -25,9 +23,10 @@ public class CommPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return items.size()==0 ? 0 :items.size();
+        return items.size();
     }
 
+    @NonNull
     @Override
     public Fragment getItem(int position) {
         return items.get(position);
@@ -39,7 +38,7 @@ public class CommPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public int getItemPosition(Object object) {
+    public int getItemPosition(@NonNull Object object) {
         return POSITION_NONE;
 
     }

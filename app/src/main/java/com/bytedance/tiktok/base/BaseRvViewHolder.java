@@ -1,18 +1,27 @@
 package com.bytedance.tiktok.base;
-
-import android.view.View;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.ButterKnife;
+import androidx.viewbinding.ViewBinding;
 
 /**
- * create by libo
- * create on 2018/11/15
- * description Recycler ViewHolder基类
+ * Recycler ViewHolder基类
  */
-public class BaseRvViewHolder extends RecyclerView.ViewHolder {
+public class BaseRvViewHolder<T extends ViewBinding> extends RecyclerView.ViewHolder {
 
-    public BaseRvViewHolder(View itemView) {
-        super(itemView);
-        ButterKnife.bind(this, itemView);
+    protected T binding;
+
+    public BaseRvViewHolder(@NonNull T viewBinding) {
+        super(viewBinding.getRoot());
+        this.binding = viewBinding;
     }
+
+    public void setBinding(T binding) {
+        this.binding = binding;
+    }
+
+    public T getBinding() {
+        return this.binding;
+    }
+
+
 }

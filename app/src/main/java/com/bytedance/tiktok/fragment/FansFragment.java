@@ -1,29 +1,21 @@
 package com.bytedance.tiktok.fragment;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.adapter.FansAdapter;
 import com.bytedance.tiktok.base.BaseFragment;
 import com.bytedance.tiktok.bean.DataCreate;
-import butterknife.BindView;
+import com.bytedance.tiktok.databinding.FragmentFansBinding;
 
-public class FansFragment extends BaseFragment {
-    @BindView(R.id.recyclerview)
-    RecyclerView recyclerView;
-    private FansAdapter fansAdapter;
-
-    @Override
-    protected int setLayoutId() {
-        return R.layout.fragment_fans;
-    }
+/**
+ * 粉丝/关注人fragment
+ */
+public class FansFragment extends BaseFragment<FragmentFansBinding> {
 
     @Override
     protected void init() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        fansAdapter = new FansAdapter(getContext(), DataCreate.userList);
-        recyclerView.setAdapter(fansAdapter);
+        binding.recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+        FansAdapter fansAdapter = new FansAdapter(getContext(), DataCreate.userList);
+        binding.recyclerview.setAdapter(fansAdapter);
     }
 
 }

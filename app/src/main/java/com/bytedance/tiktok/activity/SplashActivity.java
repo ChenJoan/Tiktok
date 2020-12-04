@@ -2,21 +2,13 @@ package com.bytedance.tiktok.activity;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
-
-import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.base.BaseActivity;
+import com.bytedance.tiktok.databinding.ActivitySplashBinding;
 
 /**
- * create by libo
- * create on 2020/5/19
- * description App启动页面
+ * App启动页面
  */
-public class SplashActivity extends BaseActivity {
-
-    @Override
-    protected int setLayoutId() {
-        return R.layout.activity_splash;
-    }
+public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
 
     @Override
     protected void init() {
