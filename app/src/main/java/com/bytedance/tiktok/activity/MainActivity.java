@@ -4,7 +4,6 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.base.BaseActivity;
 import com.bytedance.tiktok.base.CommPagerAdapter;
 import com.bytedance.tiktok.bean.MainPageChangeEvent;
@@ -14,7 +13,6 @@ import com.bytedance.tiktok.fragment.MainFragment;
 import com.bytedance.tiktok.fragment.PersonalHomeFragment;
 import com.bytedance.tiktok.utils.RxBus;
 import java.util.ArrayList;
-import butterknife.BindView;
 import rx.functions.Action1;
 
 /**

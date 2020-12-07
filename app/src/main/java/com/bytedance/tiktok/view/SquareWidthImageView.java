@@ -5,9 +5,7 @@ import android.util.AttributeSet;
 import androidx.appcompat.widget.AppCompatImageView;
 
 /**
- * create by libo
- * create on 2020/5/21
- * description 高等于宽的imageview
+ *  高等于宽的imageview
  */
 public class SquareWidthImageView extends AppCompatImageView {
 

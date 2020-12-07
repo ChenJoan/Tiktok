@@ -2,7 +2,7 @@ package com.bytedance.tiktok.utils.autolinktextview;
 
 import android.util.Log;
 
-class AutolinkUtils {
+class AutoLinkUtils {
 
     private static boolean isValidRegex(String regex){
         return regex != null && !regex.isEmpty() && regex.length() > 2;
@@ -21,7 +21,7 @@ class AutolinkUtils {
             case MODE_EMAIL:
                 return RegexParser.EMAIL_PATTERN;
             case MODE_CUSTOM:
-                if (!AutolinkUtils.isValidRegex(customRegex)) {
+                if (!AutoLinkUtils.isValidRegex(customRegex)) {
                     Log.e(AutoLinkTextView.TAG, "Your custom regex is null, returning URL_PATTERN");
                     return RegexParser.URL_PATTERN;
                 } else {

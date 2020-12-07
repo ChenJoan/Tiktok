@@ -14,7 +14,6 @@ import com.bytedance.tiktok.databinding.FragmentCurrentLocationBinding;
  * description 附近的人fragment
  */
 public class CurrentLocationFragment extends BaseFragment<FragmentCurrentLocationBinding> {
-    private GridVideoAdapter adapter;
 
     @Override
     protected void init() {
@@ -22,7 +21,7 @@ public class CurrentLocationFragment extends BaseFragment<FragmentCurrentLocatio
         
         binding.recyclerview.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
-        adapter = new GridVideoAdapter(getActivity(), DataCreate.datas);
+        GridVideoAdapter adapter = new GridVideoAdapter(getActivity(), DataCreate.datas);
         binding.recyclerview.setAdapter(adapter);
 
         binding.refreshlayout.setColorSchemeResources(R.color.color_link);

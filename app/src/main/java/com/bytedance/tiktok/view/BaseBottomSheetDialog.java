@@ -18,7 +18,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
  * description
  */
 public class BaseBottomSheetDialog extends BottomSheetDialogFragment {
-    private FrameLayout bottomSheet;
     public BottomSheetBehavior<FrameLayout> behavior;
 
     @Override
@@ -26,7 +25,7 @@ public class BaseBottomSheetDialog extends BottomSheetDialogFragment {
         super.onStart();
 
         BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
-        bottomSheet = dialog.getDelegate().findViewById(com.google.android.material.R.id.design_bottom_sheet);
+        FrameLayout bottomSheet = dialog.getDelegate().findViewById(com.google.android.material.R.id.design_bottom_sheet);
         if (bottomSheet != null) {
             CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomSheet.getLayoutParams();
             layoutParams.height = getHeight();

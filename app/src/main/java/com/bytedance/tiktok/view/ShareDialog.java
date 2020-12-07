@@ -7,15 +7,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.adapter.PrivateLetterAdapter;
 import com.bytedance.tiktok.adapter.ShareAdapter;
 import com.bytedance.tiktok.bean.DataCreate;
 import com.bytedance.tiktok.bean.ShareBean;
+import com.bytedance.tiktok.databinding.DialogShareBinding;
 import java.util.ArrayList;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * create by libo
@@ -23,34 +21,28 @@ import butterknife.ButterKnife;
  * description 分享弹框
  */
 public class ShareDialog extends BaseBottomSheetDialog {
-    @BindView(R.id.rv_private_letter)
-    RecyclerView rvPrivateLetter;
-    @BindView(R.id.rv_share)
-    RecyclerView rvShare;
+    protected DialogShareBinding binding;
     private PrivateLetterAdapter privateLetterAdapter;
     private ShareAdapter shareAdapter;
-    private View view;
     private ArrayList<ShareBean> shareBeans = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.dialog_share, container);
-        ButterKnife.bind(this, view);
+        binding = DialogShareBinding.inflate(LayoutInflater.from(getContext()), container, false);
         init();
-
-        return view;
+        return binding.getRoot();
     }
 
     private void init() {
 
-        rvPrivateLetter.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.rvPrivateLetter.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         privateLetterAdapter = new PrivateLetterAdapter(getContext(), DataCreate.userList);
-        rvPrivateLetter.setAdapter(privateLetterAdapter);
+        binding.rvPrivateLetter.setAdapter(privateLetterAdapter);
 
-        rvShare.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.rvShare.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         shareAdapter = new ShareAdapter(getContext(), shareBeans);
-        rvShare.setAdapter(shareAdapter);
+        binding.rvShare.setAdapter(shareAdapter);
 
         setShareDatas();
 

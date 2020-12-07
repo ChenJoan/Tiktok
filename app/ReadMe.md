@@ -3,6 +3,7 @@
 1、在BaseActivity中，给基类添加泛型，即ViewBinding的子类。
     定义一个泛型的ViewBinding的成员变量。
     在OnCreate方法中，进行给该成员变量赋值。
+    在代码子类实现中的使用方式，获取id为tv_head的控件，写binding.tv_head即可。
     伪代码如下：
 
     class BaseActivity<T extends ViewBinding>
@@ -34,6 +35,7 @@
 2、在BaseFragment中，给基类添加泛型，即也是ViewBinding的子类。
     定义一个泛型的ViewBinding的成员变量。
     在OnCreateView方法中，进行给该成员变量赋值。
+    在代码子类实现中的使用方式，获取id为tv_head的控件，写binding.tv_head即可。
     代码如下：
     
     class BaseFragment<T extends ViewBinding> extends Fragment {
@@ -66,6 +68,7 @@
     定义一个泛型的ViewBinding的成员变量。
     在构造方法中给该变量赋值。
     注意，该基类中必须添加成员变量binding的get方法。
+    在代码子类实现中的使用方式，获取id为tv_head的控件，写binding.getBinding().tv_head即可。
     代码如下：
     
     class BaseRvViewHolder<T extends ViewBinding> extends RecyclerView.ViewHolder {
@@ -85,5 +88,17 @@
             return this.binding;
         }
     }    
-4、在自定义View中，如何使用ViewBinding与自定义View相结合呢。    
+4、在自定义View中，如何使用ViewBinding与自定义View相结合呢。 
+    创建一个成员变量，并且在构造方法中对成员变量进行赋值。
+    代码中使用方式就是，binding.tv_head 就是获取到id为tv_head的控件，类型会自动识别。
+    代码如下：
+    
+    protected ViewControllerBinding binding;
+    private OnVideoControllerListener listener;
+
+    public ControllerView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        binding = ViewControllerBinding.inflate(LayoutInflater.from(context));
+    }  
+    
     

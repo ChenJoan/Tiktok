@@ -148,7 +148,7 @@ public class AutoLinkTextView extends AppCompatTextView {
         }
 
         for (AutoLinkMode anAutoLinkMode : autoLinkModes) {
-            String regex = AutolinkUtils.getRegexByAutoLinkMode(anAutoLinkMode, customRegex);
+            String regex = AutoLinkUtils.getRegexByAutoLinkMode(anAutoLinkMode, customRegex);
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(text);
 

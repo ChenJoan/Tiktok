@@ -5,9 +5,7 @@ import android.util.AttributeSet;
 import android.widget.VideoView;
 
 /**
- * create by libo
- * create on 2018/12/20
- * description 全屏播放Videoview
+ *  全屏播放Videoview
  */
 public class FullScreenVideoView extends VideoView {
 

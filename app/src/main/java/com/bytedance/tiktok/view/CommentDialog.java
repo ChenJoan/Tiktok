@@ -4,29 +4,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.adapter.CommentAdapter;
 import com.bytedance.tiktok.bean.CommentBean;
 import com.bytedance.tiktok.bean.DataCreate;
-
+import com.bytedance.tiktok.bean.VideoBean;
+import com.bytedance.tiktok.databinding.DialogCommentBinding;
 import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 评论弹框
  */
 public class CommentDialog extends BaseBottomSheetDialog {
-    @BindView(R.id.recyclerview)
-    RecyclerView recyclerView;
+    protected DialogCommentBinding binding;
+
     private CommentAdapter commentAdapter;
     private final ArrayList<CommentBean> dataList = new ArrayList<>();
     private final int[] likeArray = new int[]{4919, 334, 121, 423, 221, 23};
@@ -35,26 +28,23 @@ public class CommentDialog extends BaseBottomSheetDialog {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialog_comment, container);
-        ButterKnife.bind(this, view);
-
+        binding = DialogCommentBinding.inflate(LayoutInflater.from(getContext()), container, false);
         init();
-
-        return view;
+        return binding.getRoot();
     }
 
     private void init() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         commentAdapter = new CommentAdapter(getContext(), dataList);
-        recyclerView.setAdapter(commentAdapter);
+        binding.recyclerview.setAdapter(commentAdapter);
 
         loadData();
     }
 
     private void loadData() {
-        for (int i = 0; i < DataCreate.userList.size(); i++) {
+        for (VideoBean.UserBean userBean : DataCreate.userList) {
             CommentBean commentBean = new CommentBean();
-            commentBean.setUserBean(DataCreate.userList.get(i));
+            commentBean.setUserBean(userBean);
             commentBean.setContent(commentArray[(int) (Math.random() * commentArray.length)]);
             commentBean.setLikeCount(likeArray[(int) (Math.random() * likeArray.length)]);
             dataList.add(commentBean);

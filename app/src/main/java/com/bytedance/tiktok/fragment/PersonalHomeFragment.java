@@ -23,9 +23,7 @@ import rx.Subscription;
 import rx.functions.Action1;
 
 /**
- * create by libo
- * create on 2020-05-19
- * description 个人主页fragment
+ * 个人主页fragment
  */
 public class PersonalHomeFragment extends BaseFragment<FragmentPersonalHomeBinding> {
     private final ArrayList<Fragment> fragments = new ArrayList<>();

@@ -4,8 +4,6 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.activity.MainActivity;
 import com.bytedance.tiktok.activity.PlayListActivity;
@@ -25,16 +23,12 @@ import com.bytedance.tiktok.view.LikeView;
 import com.bytedance.tiktok.view.ShareDialog;
 import com.bytedance.tiktok.view.viewpagerlayoutmanager.OnViewPagerListener;
 import com.bytedance.tiktok.view.viewpagerlayoutmanager.ViewPagerLayoutManager;
-import butterknife.BindView;
 import rx.functions.Action1;
 
 /**
- * create by libo
- * create on 2020-05-19
- * description 推荐播放页
+ * 推荐播放页
  */
 public class RecommendFragment extends BaseFragment<FragmentRecommendBinding> {
-    private VideoAdapter adapter;
     private ViewPagerLayoutManager viewPagerLayoutManager;
     /** 当前播放视频位置 */
     private int curPlayPos = -1;
@@ -44,7 +38,7 @@ public class RecommendFragment extends BaseFragment<FragmentRecommendBinding> {
     @Override
     protected void init() {
 
-        adapter = new VideoAdapter(getActivity(), DataCreate.datas);
+        VideoAdapter adapter = new VideoAdapter(getActivity(), DataCreate.datas);
         binding.recyclerview.setAdapter(adapter);
 
         videoView = new FullScreenVideoView(getActivity());
